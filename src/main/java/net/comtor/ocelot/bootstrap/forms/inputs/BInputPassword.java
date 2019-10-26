@@ -9,8 +9,15 @@ import net.comtor.ocelot.html.forms.inputs.HtmlInput;
  */
 public class BInputPassword extends BInput {
 
-    public BInputPassword(String name, String label) {
-        super(HtmlInput.PASSWORD, name, label);
+    public BInputPassword(String label, String nameAndId, String help, String error) {
+        super(HtmlInput.PASSWORD, label, nameAndId, help, error);
     }
 
+    public BInputPassword(String label, String nameAndId, String help) {
+        this(label, nameAndId, help, null);
+    }
+
+    public BInputPassword(String label, String nameAndId) {
+        this(label, nameAndId, null);
+    }
 }

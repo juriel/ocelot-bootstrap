@@ -9,8 +9,15 @@ import net.comtor.ocelot.html.forms.inputs.HtmlInput;
  */
 public class BInputTime extends BInput {
 
-    public BInputTime(String name, String label) {
-        super(HtmlInput.TIME, name, label);
+    public BInputTime(String label, String nameAndId, String help, String error) {
+        super(HtmlInput.TIME, label, nameAndId, help, error);
     }
 
+    public BInputTime(String label, String nameAndId, String help) {
+        this(label, nameAndId, help, null);
+    }
+
+    public BInputTime(String label, String nameAndId) {
+        this(label, nameAndId, null);
+    }
 }

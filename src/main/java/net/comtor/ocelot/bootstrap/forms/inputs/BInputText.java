@@ -9,8 +9,16 @@ import net.comtor.ocelot.html.forms.inputs.HtmlInput;
  */
 public class BInputText extends BInput {
     
-    public BInputText(String name, String label) {
-        super(HtmlInput.TEXT, name, label);
+   
+    public BInputText(String label, String nameAndId, String help, String error) {
+        super(HtmlInput.TEXT, label, nameAndId, help, error);
     }
-    
+
+    public BInputText(String label, String nameAndId, String help) {
+        this(label, nameAndId, help, null);
+    }
+
+    public BInputText(String label, String nameAndId) {
+        this(label, nameAndId, null);
+    }
 }

@@ -37,7 +37,7 @@ public class BModalLauncher extends HtmlDiv {
         fieldSetValue = new HtmlFieldset();
         this.label = label;
         this.name = name;
-        fieldSetValue.addData(text);
+        fieldSetValue.addEscapedText(text);
         this.urlEndpoint = urlEndpoint + "/" + name;
         hidden = new HtmlInputHidden();
         errors = new HtmlSmall();
@@ -68,7 +68,7 @@ public class BModalLauncher extends HtmlDiv {
         this.addClass("form-group");
 
         HtmlLabel fieldLabel = new HtmlLabel();
-        fieldLabel.addData(label);
+        fieldLabel.addEscapedText(label);
         this.add(fieldLabel);
 
         HtmlDiv contentDiv = new HtmlDiv();

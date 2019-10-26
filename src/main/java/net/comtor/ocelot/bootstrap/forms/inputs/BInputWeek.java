@@ -9,8 +9,15 @@ import net.comtor.ocelot.html.forms.inputs.HtmlInput;
  */
 public class BInputWeek extends BInput {
 
-    public BInputWeek(String name, String label) {
-        super(HtmlInput.WEEK, name, label);
+    public BInputWeek(String label, String nameAndId, String help, String error) {
+        super(HtmlInput.WEEK, label, nameAndId, help, error);
+    }
+    
+    public BInputWeek(String label, String nameAndId, String help) {
+        this(label, nameAndId, help, null);
     }
 
+    public BInputWeek(String label, String nameAndId) {
+        this(label, nameAndId, null);
+    }
 }

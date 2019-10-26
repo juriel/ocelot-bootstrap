@@ -9,8 +9,15 @@ import net.comtor.ocelot.html.forms.inputs.HtmlInput;
  */
 public class BInputMonth extends BInput {
 
-    public BInputMonth(String name, String label) {
-        super(HtmlInput.MONTH, name, label);
+    public BInputMonth(String label, String nameAndId, String help, String error) {
+        super(HtmlInput.MONTH, label, nameAndId, help, error);
     }
 
+    public BInputMonth(String label, String nameAndId, String help) {
+        this(label, nameAndId, help, null);
+    }
+
+    public BInputMonth(String label, String nameAndId) {
+        this(label, nameAndId, null);
+    }
 }

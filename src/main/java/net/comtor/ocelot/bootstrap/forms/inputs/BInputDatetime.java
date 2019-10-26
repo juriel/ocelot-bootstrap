@@ -9,8 +9,15 @@ import net.comtor.ocelot.html.forms.inputs.HtmlInput;
  */
 public class BInputDatetime extends BInput {
 
-    public BInputDatetime(String name, String label) {
-        super(HtmlInput.DATETIMELOCAL, name, label);
+    public BInputDatetime(String label, String nameAndId, String help, String error) {
+        super(HtmlInput.DATETIMELOCAL, label, nameAndId, help, error);
+    }
+    
+    public BInputDatetime(String label, String nameAndId, String help) {
+        this(label, nameAndId, help, null);
     }
 
+    public BInputDatetime(String label, String nameAndId) {
+        this(label, nameAndId, null);
+    }
 }

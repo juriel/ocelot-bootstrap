@@ -7,17 +7,17 @@ import net.comtor.ocelot.html.forms.inputs.HtmlInput;
  *
  * @author Guido A. Cafiel Vellojin
  */
-public class BInputUrl extends BInput {
+public class BInputTel extends BInput {
 
-    public BInputUrl(String label, String nameAndId, String help, String error) {
-        super(HtmlInput.URL, label, nameAndId, help, error);
+    public BInputTel(String label, String nameAndId, String help, String error) {
+        super(HtmlInput.TEL, label, nameAndId, help, error);
     }
 
-    public BInputUrl(String label, String nameAndId, String help) {
+    public BInputTel(String label, String nameAndId, String help) {
         this(label, nameAndId, help, null);
     }
 
-    public BInputUrl(String label, String nameAndId) {
+    public BInputTel(String label, String nameAndId) {
         this(label, nameAndId, null);
     }
 }

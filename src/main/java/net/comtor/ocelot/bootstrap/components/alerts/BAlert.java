@@ -11,7 +11,7 @@ public abstract class BAlert extends HtmlDiv implements BColor {
 
     public BAlert(String message) {
         addClass("alert").addClass("alert-" + getColor());
-        addData(message);
+        addEscapedText(message);
     }
 
 }

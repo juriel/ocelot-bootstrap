@@ -146,7 +146,7 @@ public class BCard extends HtmlContainer {
         }
 
         cardHeaderTitle.addClass("card-header-title");
-        cardHeaderTitle.addData(title);
+        cardHeaderTitle.addEscapedText(title);
 
         HtmlDiv cardHeaderElements = new HtmlDiv();
         cardHeaderElements.addClass("card-header-elements")

@@ -9,8 +9,15 @@ import net.comtor.ocelot.html.forms.inputs.HtmlInput;
  */
 public class BInputEmail extends BInput {
 
-    public BInputEmail(String name, String label) {
-        super(HtmlInput.EMAIL, name, label);
+    public BInputEmail(String label, String nameAndId, String help, String error) {
+        super(HtmlInput.EMAIL, label, nameAndId, help, error);
     }
 
+    public BInputEmail(String label, String nameAndId, String help) {
+        this(label, nameAndId, help, null);
+    }
+
+    public BInputEmail(String label, String nameAndId) {
+        this(label, nameAndId, null);
+    }
 }

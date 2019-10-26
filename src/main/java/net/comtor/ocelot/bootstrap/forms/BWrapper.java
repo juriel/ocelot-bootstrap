@@ -14,7 +14,7 @@ public class BWrapper extends HtmlDiv {
         addClass("form-group");
         HtmlLabel ll = new HtmlLabel();
         ll.addClass("form-label").setStyle("color:white");
-        ll.addData(".");
+        ll.addEscapedText(".");
         add(ll);
         element.addClass("col-sm-12");
         add(element.addClass("form-comtrol").setStyle("color:white;background-color:#17a2b8"));
