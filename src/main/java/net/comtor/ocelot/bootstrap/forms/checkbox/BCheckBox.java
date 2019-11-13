@@ -1,114 +1,114 @@
-//package net.comtor.ocelot.bootstrap.forms.checkbox;
-//
-//import net.comtor.ocelot.html.HtmlTag;
-//import net.comtor.ocelot.html.forms.HtmlFormElement;
-//import net.comtor.ocelot.html.forms.HtmlLabel;
-//import net.comtor.ocelot.html.forms.HtmlOption;
-//import net.comtor.ocelot.html.forms.HtmlSelect;
-//import net.comtor.ocelot.html.forms.inputs.HtmlCheckBox;
-//import net.comtor.ocelot.html.styles.HtmlDiv;
-//
-///**
-// *
-// * @author Guido Cafiel
-// */
-//public class BCheckBox extends HtmlDiv implements HtmlFormElement {
-//
-//    HtmlLabel htmlLabel;
-//    private HtmlCheckBox htmlCheckbox;
-//
-//    public BCheckBox(String name, String label, String value, boolean checked) {
-//        this(name, label, value, "checkbox", checked);
-//    }
-//
-//    public BCheckBox(String id, String label, String value, String style, boolean checked) {
-//
-//        htmlLabel = new HtmlLabel();
-//        htmlLabel.setStyle("font-weight: inherit;");
-//
-//        this.htmlCheckbox = new HtmlCheckBox();
-//        htmlLabel.add(htmlCheckbox);
-//
-//        htmlCheckbox.setId(id);
-//        htmlCheckbox.setName(id);
-//        htmlCheckbox.setValue(value);
-//        if (checked) {
-//            htmlCheckbox.checked();
-//        }
-//
-//        htmlLabel.addData(label);
-//
-//        add(htmlLabel);
-//    }
-//
-//    public HtmlFormElement required() {
-//        htmlCheckbox.required();
-//        return this;
-//    }
-//
-//    public HtmlTag checked() {
-//        htmlCheckbox.addAttribute("checked", "checked");
-//        return this;
-//    }
-//
-//    public HtmlTag unChecked() {
-//        htmlCheckbox.removeAttribute("checked");
-//        return this;
-//    }
-//
-//    @Override
-//    public HtmlFormElement setValue(String value) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public String getValue() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public HtmlFormElement removeRequired() {
-//        htmlCheckbox.removeRequired();
-//        return this;
-//    }
-//
-//    @Override
-//    public HtmlFormElement disable() {
-//        htmlCheckbox.disable();
-//        return this;
-//    }
-//
-//    @Override
-//    public HtmlFormElement enable() {
-//        htmlCheckbox.enable();
-//        return this;
-//    }
-//
-//    @Override
-//    public HtmlFormElement readOnly() {
-//        htmlCheckbox.readOnly();
-//        return this;
-//    }
-//
-//    @Override
-//    public HtmlFormElement removeReadOnly() {
-//        htmlCheckbox.removeReadOnly();
-//        return this;
-//    }
-//
-//    @Override
-//    public HtmlSelect addOption(String value, String label) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public HtmlSelect addOption(String value, String label, boolean selected) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public HtmlSelect addOption(HtmlOption optionTag) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//}
+package net.comtor.ocelot.bootstrap.forms.checkbox;
+
+import net.comtor.ocelot.html.forms.HtmlFormElement;
+import net.comtor.ocelot.html.forms.HtmlLabel;
+import net.comtor.ocelot.html.forms.IHtmlCheckbox;
+import net.comtor.ocelot.html.forms.inputs.HtmlCheckBox;
+import net.comtor.ocelot.html.styles.HtmlDiv;
+
+/**
+ *
+ * @author juriel@comtor.net
+ * @author juandiego@comtor.net
+ * @since 1.8
+ * @version Nov 13, 2019
+ */
+public class BCheckBox extends HtmlDiv implements IHtmlCheckbox {
+
+    public static final String FORM_CHECK_CLASS = "form-check";
+    public static final String FORM_CHECK_INPUT_CLASS = "form-check-input";
+    public static final String FORM_CHECK_LABEL_CLASS = "form-check-label";
+
+    private HtmlLabel label;
+    private HtmlCheckBox checkbox;
+
+    public BCheckBox(String labelText, String value, String name, String style, boolean checked) {
+        addClass(FORM_CHECK_CLASS);
+
+        checkbox = new HtmlCheckBox(checked);
+        checkbox.addClass(FORM_CHECK_INPUT_CLASS);
+        checkbox.setId(name);
+        checkbox.setName(name);
+        checkbox.setValue(value);
+        add(checkbox);
+
+        label = new HtmlLabel(name, labelText);
+        label.setStyle(style);
+        add(label);
+    }
+
+    public BCheckBox(String labelText, String value, String name, boolean checked) {
+        this(labelText, value, name, FORM_CHECK_LABEL_CLASS, checked);
+    }
+
+    public BCheckBox(String labelText, String value, String name) {
+        this(labelText, value, name, false);
+    }
+
+    @Override
+    public HtmlFormElement required() {
+        checkbox.required();
+
+        return this;
+    }
+
+    @Override
+    public HtmlFormElement setValue(String value) {
+        checkbox.setValue(value);
+
+        return this;
+    }
+
+    @Override
+    public String getValue() {
+        return checkbox.getValue();
+    }
+
+    @Override
+    public HtmlFormElement removeRequired() {
+        checkbox.removeRequired();
+
+        return this;
+    }
+
+    @Override
+    public HtmlFormElement disable() {
+        checkbox.disable();
+
+        return this;
+    }
+
+    @Override
+    public HtmlFormElement enable() {
+        checkbox.enable();
+
+        return this;
+    }
+
+    @Override
+    public HtmlFormElement readOnly() {
+        checkbox.readOnly();
+
+        return this;
+    }
+
+    @Override
+    public HtmlFormElement removeReadOnly() {
+        checkbox.removeReadOnly();
+
+        return this;
+    }
+
+    @Override
+    public HtmlFormElement setName(String name) {
+        checkbox.setName(name);
+
+        return this;
+    }
+
+    @Override
+    public String getName() {
+        return checkbox.getName();
+    }
+
+}

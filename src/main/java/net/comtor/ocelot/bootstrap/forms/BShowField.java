@@ -14,6 +14,7 @@ public class BShowField extends BootstrapFormElement<HtmlInputText> {
         super(label, new HtmlInputText());
 
         showInput = getInput();
+        showInput.setId(name + "_visible");
         showInput.setValue(showValue);
         showInput.addAttribute("read-only", "read-only");
         showInput.setStyle("background-color: #D8D8D8");
