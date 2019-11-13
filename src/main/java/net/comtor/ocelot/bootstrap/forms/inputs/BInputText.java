@@ -11,7 +11,7 @@ public class BInputText extends BInput {
     
    
     public BInputText(String label, String nameAndId, String help, String error) {
-        super(HtmlInput.TEXT, label, nameAndId, help, error);
+        super(HtmlInput.TEXT, label, nameAndId, help, error);        
     }
 
     public BInputText(String label, String nameAndId, String help) {

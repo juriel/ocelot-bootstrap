@@ -33,8 +33,12 @@ public class BootstrapFormElement<INPUT extends HtmlFormElement> extends HtmlCon
         formgroup = new HtmlDiv();
         formgroup.addClass("form-group");
         String formId = formElement.getId();
+
         if (formId == null) {
-            throw new RuntimeException("Form Element requires id " + labelStr + " " + formElement);
+            formId = formElement.getName();
+            if (formId == null) {
+                throw new RuntimeException("Form Element requires id [" + labelStr + "] " + formElement);
+            }
         }
         label = new HtmlLabel(formId, labelStr);
         this.formElement = formElement;
