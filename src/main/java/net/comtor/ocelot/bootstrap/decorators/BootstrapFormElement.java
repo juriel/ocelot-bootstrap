@@ -204,4 +204,7 @@ public class BootstrapFormElement<INPUT extends HtmlFormElement> extends HtmlCon
         return errorsSmall;
     }
 
+    public HtmlDiv getMainContainer() {
+        return formgroup;
+    }
 }
