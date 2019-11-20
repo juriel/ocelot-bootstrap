@@ -1,5 +1,8 @@
 package net.comtor.ocelot.bootstrap.forms.checkbox;
 
+import net.comtor.html.advanced.LabelInputHelpError;
+import net.comtor.ocelot.html.HtmlEscapedText;
+import net.comtor.ocelot.html.HtmlObject;
 import net.comtor.ocelot.html.forms.HtmlFormElement;
 import net.comtor.ocelot.html.forms.HtmlLabel;
 import net.comtor.ocelot.html.forms.IHtmlCheckbox;
@@ -13,11 +16,12 @@ import net.comtor.ocelot.html.styles.HtmlDiv;
  * @since 1.8
  * @version Nov 13, 2019
  */
-public class BCheckBox extends HtmlDiv implements IHtmlCheckbox {
+public class BCheckBox extends HtmlDiv implements LabelInputHelpError<HtmlCheckBox>, IHtmlCheckbox {
 
     public static final String FORM_CHECK_CLASS = "form-check";
     public static final String FORM_CHECK_INPUT_CLASS = "form-check-input";
     public static final String FORM_CHECK_LABEL_CLASS = "form-check-label";
+    public static final String FORM_CHECK_SIGN_CLASS = "form-check-sign";
 
     private HtmlLabel label;
     private HtmlCheckBox checkbox;
@@ -109,6 +113,52 @@ public class BCheckBox extends HtmlDiv implements IHtmlCheckbox {
     @Override
     public String getName() {
         return checkbox.getName();
+    }
+
+    @Override
+    public HtmlCheckBox getInput() {
+        return checkbox;
+    }
+
+    @Override
+    public void setLabel(String label) {
+        this.label.removeAll();
+        this.label.addEscapedText(label);
+    }
+
+    @Override
+    public String getLabel() {
+        HtmlObject labelElement = label.getFirst();
+
+        if ((labelElement != null) && (labelElement instanceof HtmlEscapedText)) {
+            HtmlEscapedText labelText = (HtmlEscapedText) labelElement;
+
+            return labelText.getText();
+        }
+
+        return null;
+    }
+
+    @Override
+    public void setHelp(String label) {
+    }
+
+    @Override
+    public String getHelp() {
+        return null;
+    }
+
+    @Override
+    public void setError(String label) {
+    }
+
+    @Override
+    public String getError() {
+        return null;
+    }
+
+    public HtmlLabel getLabelElement() {
+        return label;
     }
 
 }

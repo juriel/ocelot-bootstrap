@@ -29,31 +29,36 @@ public class BootstrapFormElement<INPUT extends HtmlFormElement> extends HtmlCon
     private HtmlSmall helpSmall;
     private HtmlSmall errorsSmall;
 
-    public BootstrapFormElement(String labelStr, INPUT formElement, String helpStr, String errorStr) {
+    public BootstrapFormElement(String labelText, INPUT formElement, String helpText, String errorText) {
         formgroup = new HtmlDiv();
         formgroup.addClass("form-group");
+
         String formId = formElement.getId();
 
         if (formId == null) {
             formId = formElement.getName();
+
             if (formId == null) {
-                throw new RuntimeException("Form Element requires id [" + labelStr + "] " + formElement);
+                throw new RuntimeException("Form Element requires id [" + labelText + "] " + formElement.toString());
             }
         }
-        label = new HtmlLabel(formId, labelStr);
+
+        label = new HtmlLabel(formId, labelText);
         this.formElement = formElement;
         this.formElement.addClass("form-control");
 
         helpSmall = new HtmlSmall();
         helpSmall.addClass("form-text").addClass("text-muted");
-        if (helpStr != null) {
-            helpSmall.addEscapedText(helpStr);
+
+        if (helpText != null) {
+            helpSmall.addEscapedText(helpText);
         }
 
         errorsSmall = new HtmlSmall();
         errorsSmall.setId(formId + "_errors").addClass("error_small");
-        if (errorStr != null) {
-            errorsSmall.addEscapedText(errorStr);
+
+        if (errorText != null) {
+            errorsSmall.addEscapedText(errorText);
         }
 
         formgroup.add(label);
@@ -61,15 +66,14 @@ public class BootstrapFormElement<INPUT extends HtmlFormElement> extends HtmlCon
         formgroup.add(helpSmall);
         formgroup.add(errorsSmall);
         add(formgroup);
-
     }
 
-    public BootstrapFormElement(String labelStr, INPUT formElement, String help) {
-        this(labelStr, formElement, help, null);
+    public BootstrapFormElement(String labelText, INPUT formElement, String helpText) {
+        this(labelText, formElement, helpText, null);
     }
 
-    public BootstrapFormElement(String labelStr, INPUT formElement) {
-        this(labelStr, formElement, null);
+    public BootstrapFormElement(String labelText, INPUT formElement) {
+        this(labelText, formElement, null);
     }
 
     @Override
@@ -85,13 +89,15 @@ public class BootstrapFormElement<INPUT extends HtmlFormElement> extends HtmlCon
 
     @Override
     public String getLabel() {
-        HtmlObject t = label.getFirst();
-        if (t != null && t instanceof HtmlEscapedText) {
-            HtmlEscapedText tt = (HtmlEscapedText) t;
-            return tt.getText();
-        }
-        return null;
+        HtmlObject labelElement = label.getFirst();
 
+        if ((labelElement != null) && (labelElement instanceof HtmlEscapedText)) {
+            HtmlEscapedText labelText = (HtmlEscapedText) labelElement;
+
+            return labelText.getText();
+        }
+
+        return null;
     }
 
     @Override
@@ -102,11 +108,14 @@ public class BootstrapFormElement<INPUT extends HtmlFormElement> extends HtmlCon
 
     @Override
     public String getHelp() {
-        HtmlObject t = helpSmall.getFirst();
-        if (t != null && t instanceof HtmlEscapedText) {
-            HtmlEscapedText tt = (HtmlEscapedText) t;
-            return tt.getText();
+        HtmlObject helpElement = helpSmall.getFirst();
+
+        if ((helpElement != null) && (helpElement instanceof HtmlEscapedText)) {
+            HtmlEscapedText helpText = (HtmlEscapedText) helpElement;
+
+            return helpText.getText();
         }
+
         return null;
     }
 
@@ -118,17 +127,21 @@ public class BootstrapFormElement<INPUT extends HtmlFormElement> extends HtmlCon
 
     @Override
     public String getError() {
-        HtmlObject t = errorsSmall.getFirst();
-        if (t != null && t instanceof HtmlEscapedText) {
-            HtmlEscapedText tt = (HtmlEscapedText) t;
-            return tt.getText();
+        HtmlObject errorElement = errorsSmall.getFirst();
+
+        if ((errorElement != null) && (errorElement instanceof HtmlEscapedText)) {
+            HtmlEscapedText errorText = (HtmlEscapedText) errorElement;
+
+            return errorText.getText();
         }
+
         return null;
     }
 
     @Override
     public IHtmlTag addAttribute(String name, String value) {
         formElement.addAttribute(name, value);
+
         return this;
     }
 
@@ -140,38 +153,55 @@ public class BootstrapFormElement<INPUT extends HtmlFormElement> extends HtmlCon
     @Override
     public IHtmlTag removeAttribute(String key) {
         formElement.removeAttribute(key);
+
         return this;
     }
 
     @Override
     public IHtmlTag setClass(String myClass) {
         formElement.setClass(myClass);
-        return this;
 
+        return this;
     }
 
     @Override
     public IHtmlTag removeClass(String myClass) {
         formElement.removeClass(myClass);
+
         return this;
     }
 
     @Override
     public IHtmlTag addClass(String myClass) {
         formElement.addClass(myClass);
+
         return this;
     }
 
     @Override
     public IHtmlTag setStyle(String style) {
         formElement.setStyle(style);
+
         return this;
     }
 
     @Override
     public IHtmlTag setAccessKey(String accessKey) {
         formElement.setAccessKey(accessKey);
+
         return this;
+    }
+
+    public HtmlLabel getLabelElement() {
+        return label;
+    }
+
+    public HtmlSmall getHelpElement() {
+        return helpSmall;
+    }
+
+    public HtmlSmall getErrorElement() {
+        return errorsSmall;
     }
 
 }

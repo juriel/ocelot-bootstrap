@@ -5,13 +5,14 @@ import net.comtor.ocelot.html.forms.inputs.HtmlInputHidden;
 import net.comtor.ocelot.html.forms.inputs.HtmlInputText;
 import org.apache.commons.lang3.StringUtils;
 
+// TODO: REVISAR CÓMO SE VEN EN FORM
 public class BShowField extends BootstrapFormElement<HtmlInputText> {
 
     private HtmlInputText showInput;
     private HtmlInputHidden hiddenInput;
 
     public BShowField(String label, String showValue, String name, String hiddenValue) {
-        super(label, new HtmlInputText());
+        super(label, new HtmlInputText(name + "_visible"));
 
         showInput = getInput();
         showInput.setId(name + "_visible");
