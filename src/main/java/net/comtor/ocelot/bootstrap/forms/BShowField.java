@@ -5,7 +5,6 @@ import net.comtor.ocelot.html.forms.inputs.HtmlInputHidden;
 import net.comtor.ocelot.html.forms.inputs.HtmlInputText;
 import org.apache.commons.lang3.StringUtils;
 
-// TODO: REVISAR CÓMO SE VEN EN FORM
 public class BShowField extends BootstrapFormElement<HtmlInputText> {
 
     private HtmlInputText showInput;
@@ -17,7 +16,7 @@ public class BShowField extends BootstrapFormElement<HtmlInputText> {
         showInput = getInput();
         showInput.setId(name + "_visible");
         showInput.setValue(showValue);
-        showInput.addAttribute("read-only", "read-only");
+        showInput.addAttribute("readonly", "readonly");
         showInput.setStyle("background-color: #D8D8D8");
 
         if (name != null) {
