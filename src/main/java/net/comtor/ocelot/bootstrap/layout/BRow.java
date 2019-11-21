@@ -15,6 +15,7 @@ public class BRow extends BLayout {
 
     public BRow() {
         elementList = new LinkedList<>();
+        
         addClass("row");
     }
 
@@ -46,7 +47,7 @@ public class BRow extends BLayout {
         }
 
         for (BootstrapFormElement element : elementList) {
-            element.addClass("col-sm-" + columns);
+            element.getMainContainer().addClass("col-sm-" + columns);
             add(element);
         }
 

@@ -26,7 +26,7 @@ public class BShowField extends BootstrapFormElement<HtmlInputText> {
     }
 
     public BShowField(String label, String showValue, String name) {
-        this(label, showValue, name, "");
+        this(label, showValue, name, null);
     }
 
     public BShowField(String label, String showValue) {
@@ -49,7 +49,7 @@ public class BShowField extends BootstrapFormElement<HtmlInputText> {
     @Override
     protected void preHtmlRender() {
         if (hiddenInput != null) {
-            add(hiddenInput);
+            getMainContainer().add(hiddenInput);
         }
 
         super.preHtmlRender();
