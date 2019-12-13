@@ -1,70 +1,81 @@
-//package net.comtor.ocelot.bootstrap.forms.inputs;
-//
-//import java.text.SimpleDateFormat;
-//import java.util.Date;
-//import net.comtor.ocelot.html.styles.HtmlDiv;
-//
-///**
-// *
-// * @author Guido Cafiel
-// */
-//public class BInputDateRange extends HtmlDiv implements {
-//
-//    BInputDate start;
-//    BInputDate end;
-//
-//    public BInputDateRange(String startName, String startLabel, String endName, String endLabel) {
-//        initComponent(startName, startLabel, endName, endLabel, false);
-//    }
-//
-//    public BInputDateRange(String startName, String startLabel, String endName, String endLabel, boolean required) {
-//        initComponent(startName, startLabel, endName, endLabel, required);
-//    }
-//
-//    private void initComponent(String startName, String startLabel, String endName, String endLabel, boolean required) {
-//        addClass("row");
-//        start = new BInputDate(startName, startLabel);
-//        start.addAttribute("max-range", endName);
-//        start.getDiv().addClass("col-sm-6");
-//
-//        end = new BInputDate(endName, endLabel);
-//        end.addAttribute("min-range", startName);
-//        end.getDiv().addClass("col-sm-6");
-//
-//        if (required) {
-//            start.addAttribute("required", "");
-//            end.addAttribute("required", "");
-//        }
-//
-//        add(start).add(end);
-//
-//    }
-//
-//    public BInputDateRange required() {
-//        start.required();
-//        end.required();
-//        return this;
-//    }
-//
-//    public BInputDateRange setValues(Date startDate, Date endDate) {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        start.setValue(sdf.format(startDate));
-//        end.setValue(sdf.format(endDate));
-//        return this;
-//    }
-//
-//    public BInputDateRange setValues(String startDate, String endDate) {
-//        start.setValue(startDate);
-//        end.setValue(endDate);
-//        return this;
-//    }
-//
-//    public BInputDate getStart() {
-//        return start;
-//    }
-//
-//    public BInputDate getEnd() {
-//        return end;
-//    }
-//
-//}
+package net.comtor.ocelot.bootstrap.forms.inputs;
+
+import java.text.SimpleDateFormat;
+import net.comtor.ocelot.html.styles.HtmlDiv;
+
+/**
+ *
+ * @author Guido Cafiel
+ * @author juandiego@comtor.net
+ * @since 1.8
+ * @version Dec 13, 2019
+ */
+public class BInputDateRange extends HtmlDiv {
+
+    private BInputDate startDate;
+    private BInputDate endDate;
+
+    public BInputDateRange(String startDateLabel, String startDateName, String endDateLabel, String endDateName, boolean required) {
+        init(startDateLabel, startDateName, endDateLabel, endDateName, required);
+    }
+
+    public BInputDateRange(String startDateLabel, String startDateName, String endDateLabel, String endDateName) {
+        this(startDateLabel, startDateName, endDateLabel, endDateName, false);
+    }
+
+    private void init(String startDateLabel, String startDateName, String endDateLabel, String endDateName, boolean required) {
+        addClass("row");
+
+        startDate = new BInputDate(startDateLabel, startDateName);
+        startDate.addAttribute("max-range", endDateName);
+        startDate.getMainContainer().addClass("col-sm-6");
+
+        if (required) {
+            startDate.required();
+        }
+
+        add(startDate);
+
+        endDate = new BInputDate(endDateLabel, endDateName);
+        endDate.addAttribute("min-range", startDateName);
+        endDate.getMainContainer().addClass("col-sm-6");
+
+        if (required) {
+            endDate.required();
+        }
+
+        add(endDate);
+    }
+
+    public BInputDateRange required() {
+        startDate.required();
+        endDate.required();
+
+        return this;
+    }
+
+    public BInputDateRange setValues(java.util.Date startDate, java.util.Date endDate) {
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        this.startDate.setValue(sdf.format(startDate));
+        this.endDate.setValue(sdf.format(endDate));
+
+        return this;
+    }
+
+    public BInputDateRange setValues(String startDate, String endDate) {
+        this.startDate.setValue(startDate);
+        this.endDate.setValue(endDate);
+
+        return this;
+    }
+
+    public BInputDate getStartDate() {
+        return startDate;
+    }
+
+    public BInputDate getEndDate() {
+        return endDate;
+    }
+
+}
