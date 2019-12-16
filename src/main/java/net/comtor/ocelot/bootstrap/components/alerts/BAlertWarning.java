@@ -9,7 +9,7 @@ import net.comtor.ocelot.bootstrap.commons.BColorWarning;
 public class BAlertWarning extends BAlert implements BColorWarning {
 
     public BAlertWarning(String message) {
-        super(message);
+        super("fas fa-exclamation-triangle mr-2", message);
     }
 
 }

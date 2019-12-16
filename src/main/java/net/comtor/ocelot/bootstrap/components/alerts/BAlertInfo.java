@@ -9,7 +9,7 @@ import net.comtor.ocelot.bootstrap.commons.BColorInfo;
 public class BAlertInfo extends BAlert implements BColorInfo {
 
     public BAlertInfo(String message) {
-        super(message);
+        super("fas fa-info-circle mr-2", message);
     }
 
 }

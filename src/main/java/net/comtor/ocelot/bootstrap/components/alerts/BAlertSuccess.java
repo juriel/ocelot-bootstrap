@@ -9,7 +9,7 @@ import net.comtor.ocelot.bootstrap.commons.BColorSuccess;
 public class BAlertSuccess extends BAlert implements BColorSuccess {
 
     public BAlertSuccess(String message) {
-        super(message);
+        super("fas fa-check-circle mr-2", message);
     }
 
 }

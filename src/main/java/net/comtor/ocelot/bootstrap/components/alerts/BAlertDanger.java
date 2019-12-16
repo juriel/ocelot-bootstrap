@@ -9,7 +9,7 @@ import net.comtor.ocelot.bootstrap.commons.BColorDanger;
 public class BAlertDanger extends BAlert implements BColorDanger {
 
     public BAlertDanger(String message) {
-        super(message);
+        super("fas fa-times-circle mr-2",message);
     }
 
 }
