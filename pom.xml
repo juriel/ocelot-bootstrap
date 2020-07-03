@@ -18,4 +18,5 @@
             <version>2.0</version>
         </dependency>        
     </dependencies>
+    <name>ocelot-bootstrap-2</name>
 </project>
