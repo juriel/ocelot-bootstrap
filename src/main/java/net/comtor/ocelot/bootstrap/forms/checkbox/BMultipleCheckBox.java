@@ -68,28 +68,6 @@ public class BMultipleCheckBox extends HtmlDiv {
         container.add(check);
     }
 
-//    public void addCheck(String label, String value, boolean checked) {
-//        BCheckBox box = new BCheckBox(label, value, this.name, this.style, checked);
-//        box.setClass("col-sm-3");
-//
-//        container.add(box);
-//    }
-
-//    public void addCheck(String label, String value) {
-//        addCheck(label, value, false);
-//    }
-
-//    public void addCheck(String label, String value, String category, boolean checked) {
-//        newBox(category, new BCheckBox(name, label, value, style, checked));
-//    }
-
-//    public void addCheck(String label, String value, String category) {
-//        container.removeClass("form-check");
-//        container.removeClass("form-check-inline");
-//
-//        newBox(category, new BCheckBox(label, value, name, style, false));
-//    }
-
     public void newBox(String category, IHtmlCheckbox check) {
         if (boxes.containsKey(category)) {
             boxes.get(category).add(check);
