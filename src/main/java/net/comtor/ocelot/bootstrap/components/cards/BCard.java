@@ -22,14 +22,14 @@ public class BCard extends HtmlContainer {
     private String title;
     private List<HtmlObject> headerElements;
     private List<HtmlObject> bodyElements;
-    private boolean titleSmall;
+    private boolean hasSmallTitle;
     private HtmlDiv mainDiv;
 
     public BCard() {
         this.size = 12;
         this.headerElements = new LinkedList<>();
         this.bodyElements = new LinkedList<>();
-        titleSmall = false;
+        hasSmallTitle = false;
         mainDiv = new HtmlDiv();
     }
 
@@ -40,13 +40,15 @@ public class BCard extends HtmlContainer {
 
     public BCard(String icon, String title) {
         this(title);
+
         if (icon != null) {
             this.icon = new HtmlIcon();
             this.icon.addClass(icon);
             this.icon.addClass("card-title-icon");
             this.icon.addClass("mr-2");
         }
-        titleSmall = false;
+
+        hasSmallTitle = false;
     }
 
     public BCard(String title, List<HtmlObject> headerElements) {
@@ -55,11 +57,12 @@ public class BCard extends HtmlContainer {
         this.title = title;
         this.headerElements = headerElements == null ? new LinkedList<>() : headerElements;
         this.bodyElements = new LinkedList<>();
-        titleSmall = false;
+        hasSmallTitle = false;
     }
 
     public BCard(int size, String title) {
         mainDiv = new HtmlDiv();
+
         if (size > 12) {
             size = 12;
         }
@@ -72,11 +75,12 @@ public class BCard extends HtmlContainer {
         this.title = title;
         this.headerElements = new LinkedList<>();
         this.bodyElements = new LinkedList<>();
-        titleSmall = false;
+        hasSmallTitle = false;
     }
 
     public BCard(int size, String title, boolean titleSmall) {
         mainDiv = new HtmlDiv();
+
         if (size > 12) {
             size = 12;
         }
@@ -89,7 +93,7 @@ public class BCard extends HtmlContainer {
         this.title = title;
         this.headerElements = new LinkedList<>();
         this.bodyElements = new LinkedList<>();
-        this.titleSmall = titleSmall;
+        this.hasSmallTitle = titleSmall;
     }
 
     public HtmlObject setHeaderElements(List<HtmlObject> headerElements) {
@@ -130,12 +134,11 @@ public class BCard extends HtmlContainer {
 
     protected HtmlObject getHeader(String title, List<HtmlObject> headerElements) {
         HtmlDiv cardHeader = new HtmlDiv();
-        cardHeader.addClass("card-header")
-                .addClass("with-elements");
+        cardHeader.addClass("card-header").addClass("with-elements");
 
         HtmlDoubleTag cardHeaderTitle;
 
-        if (titleSmall) {
+        if (hasSmallTitle) {
             cardHeaderTitle = new HtmlH5();
         } else {
             cardHeaderTitle = new HtmlH2();
@@ -149,12 +152,12 @@ public class BCard extends HtmlContainer {
         cardHeaderTitle.addEscapedText(title);
 
         HtmlDiv cardHeaderElements = new HtmlDiv();
-        cardHeaderElements.addClass("card-header-elements")
-                .addClass("ml-auto");
+        cardHeaderElements.addClass("card-header-elements").addClass("ml-auto");
         cardHeaderElements.addAll(headerElements);
 
         cardHeader.add(cardHeaderTitle);
         cardHeader.add(cardHeaderElements);
+
         return cardHeader;
     }
 
@@ -162,29 +165,30 @@ public class BCard extends HtmlContainer {
         HtmlDiv body = new HtmlDiv();
         body.addClass("card-body");
         body.addAll(bodyElements);
+
         return body;
     }
 
     @Override
     protected void preHtmlRender() {
-        super.preHtmlRender(); //To change body of generated methods, choose Tools | Templates.
+        super.preHtmlRender();
 
         mainDiv.add(getHeader(title, headerElements));
         mainDiv.add(getBody(bodyElements));
         mainDiv.addClass("card");
 
         if (size > 12) {
-            mainDiv.addClass("col-12")
-                    .addClass("h-100");
+            mainDiv.addClass("col-12").addClass("h-100");
             add(mainDiv);
+
             return;
         }
 
-        HtmlDiv resp = new HtmlDiv();
-        resp.setStyle("padding: 5px");
-        resp.setClass("col-md-" + size);
-        resp.add(mainDiv);
-        add(mainDiv);
+        HtmlDiv container = new HtmlDiv();
+        container.setStyle("padding: 5px");
+        container.addClass("col-md-" + size);
+        container.add(mainDiv);
+        add(container);
     }
 
     public void addClass(String clazz) {
