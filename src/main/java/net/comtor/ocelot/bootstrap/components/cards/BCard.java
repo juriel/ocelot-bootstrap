@@ -195,4 +195,12 @@ public class BCard extends HtmlContainer {
         mainDiv.addClass(clazz);
     }
 
+    public boolean hasSmallTitle() {
+        return hasSmallTitle;
+    }
+
+    public HtmlIcon getIcon() {
+        return icon;
+    }
+
 }
