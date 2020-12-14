@@ -22,16 +22,16 @@ public class BMultipleCheckBox extends HtmlDiv {
 
     private String label;
     private String style;
-    private String name;
+    private String nameAndId;
     private HtmlDiv container;
     private Map<String, LinkedList<IHtmlCheckbox>> boxes;
 
-    public BMultipleCheckBox(String labelText, String name, String style) {
+    public BMultipleCheckBox(String labelText, String nameAndId, String style) {
         this.label = labelText;
-        this.name = name;
+        this.nameAndId = nameAndId;
         this.style = style;
 
-        container = new HtmlDiv();
+        container = new HtmlDiv(nameAndId);
         container.addClass("-inline");
         container.addClass("row");
         container.setStyle("padding-left: 30px; padding-right: 30px;");
@@ -43,11 +43,11 @@ public class BMultipleCheckBox extends HtmlDiv {
         init();
     }
 
-    public BMultipleCheckBox(String labelText, String name) {
+    public BMultipleCheckBox(String labelText, String nameAndId) {
         this.label = labelText;
-        this.name = name;
+        this.nameAndId = nameAndId;
 
-        container = new HtmlDiv();
+        container = new HtmlDiv(nameAndId);
         container.addClass("-inline");
         container.addClass("row");
         container.setStyle("padding-left: 30px; padding-right: 30px;");
@@ -88,17 +88,21 @@ public class BMultipleCheckBox extends HtmlDiv {
 
     private void fillBoxesInFiledSet() {
         if (!boxes.isEmpty()) {
+            int columns = Math.floorDiv(12, boxes.size());
+
+            if (columns < 1) {
+                columns = 1;
+            }
+
             for (Map.Entry<String, LinkedList<IHtmlCheckbox>> entry : boxes.entrySet()) {
                 String key = entry.getKey();
                 LinkedList<IHtmlCheckbox> box = entry.getValue();
 
                 HtmlFieldset fieldSet = new HtmlFieldset(key);
-                fieldSet.addClass("col-sm-2");
+                fieldSet.addClass("col-sm-" + columns);
                 fieldSet.addClass("ocelot-privileges");
 
-                box.stream().forEach((mercuryCheckBox) -> {
-                    fieldSet.add(mercuryCheckBox);
-                });
+                box.stream().forEach((mercuryCheckBox) -> fieldSet.add(mercuryCheckBox));
 
                 this.container.add(fieldSet);
             }

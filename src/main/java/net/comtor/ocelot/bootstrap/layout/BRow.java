@@ -21,15 +21,13 @@ public class BRow extends BLayout {
 
     public BRow addDinamic(BootstrapFormElement... elements) throws Exception {
         if (!elementList.isEmpty()) {
-            throw new Exception("El BRow ya contiene objetos, use el método addTag "
-                    + "para agregar mas elementos de forma asincrona.");
+            throw new Exception("El BRow ya contiene objetos, use el método addTag para agregar mas elementos de forma asincrona.");
         }
 
         elementList.addAll(Arrays.asList(elements));
 
         if (elementList.size() > 12) {
-            throw new IndexOutOfBoundsException("El BRow no puede conter mas de "
-                    + "12 elementos.");
+            throw new IndexOutOfBoundsException("El BRow no puede conter mas de 12 elementos.");
         }
 
         addClasses(elementList);
