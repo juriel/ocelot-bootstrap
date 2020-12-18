@@ -9,6 +9,7 @@ import net.comtor.ocelot.html.formatting.HtmlSmall;
 import net.comtor.ocelot.html.forms.HtmlFormElement;
 import net.comtor.ocelot.html.forms.HtmlLabel;
 import net.comtor.ocelot.html.styles.HtmlDiv;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -43,28 +44,39 @@ public class BootstrapFormElement<INPUT extends HtmlFormElement> extends HtmlCon
             }
         }
 
-        label = new HtmlLabel(formId, labelText);
-        this.formElement = formElement;
-        this.formElement.addClass("form-control");
-
-        helpSmall = new HtmlSmall();
-        helpSmall.addClass("form-text").addClass("text-muted");
-
-        if (helpText != null) {
-            helpSmall.addEscapedText(helpText);
+        if (StringUtils.isNotEmpty(labelText)) {
+            label = new HtmlLabel(formId, labelText);
+            formgroup.add(label);
         }
 
-        errorsSmall = new HtmlSmall();
-        errorsSmall.setId(formId + "_errors").addClass("error_small");
-
-        if (errorText != null) {
-            errorsSmall.addEscapedText(errorText);
+        {
+            this.formElement = formElement;
+            this.formElement.addClass("form-control");
+            formgroup.add(this.formElement);
         }
 
-        formgroup.add(label);
-        formgroup.add(this.formElement);
-        formgroup.add(helpSmall);
-        formgroup.add(errorsSmall);
+        {
+            helpSmall = new HtmlSmall();
+            helpSmall.addClass("form-text").addClass("text-muted");
+
+            if (StringUtils.isNotEmpty(helpText)) {
+                helpSmall.addEscapedText(helpText);
+            }
+
+            formgroup.add(helpSmall);
+        }
+
+        {
+            errorsSmall = new HtmlSmall();
+            errorsSmall.setId(formId + "_errors").addClass("error_small");
+
+            if (StringUtils.isNotEmpty(errorText)) {
+                errorsSmall.addEscapedText(errorText);
+            }
+
+            formgroup.add(errorsSmall);
+        }
+
         add(formgroup);
     }
 
