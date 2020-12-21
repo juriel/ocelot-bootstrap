@@ -73,7 +73,9 @@ public class BMultipleCheckBox extends HtmlDiv {
             boxes.get(category).add(check);
         } else {
             LinkedList<IHtmlCheckbox> listBox = new LinkedList<>();
-            listBox.add(check);
+            if (check != null) {
+                listBox.add(check);
+            }
 
             boxes.put(category, listBox);
         }
@@ -101,6 +103,7 @@ public class BMultipleCheckBox extends HtmlDiv {
                 HtmlFieldset fieldSet = new HtmlFieldset(key);
                 fieldSet.addClass("col-sm-" + columns);
                 fieldSet.addClass("ocelot-privileges");
+                fieldSet.setId(key);
 
                 box.stream().forEach((mercuryCheckBox) -> fieldSet.add(mercuryCheckBox));
 
