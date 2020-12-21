@@ -61,6 +61,7 @@ public class BMultipleCheckBox extends HtmlDiv {
             boxes.get(category).add(check);
         } else {
             LinkedList<IHtmlCheckbox> listBox = new LinkedList<>();
+
             if (check != null) {
                 listBox.add(check);
             }
@@ -109,15 +110,23 @@ public class BMultipleCheckBox extends HtmlDiv {
             int columns = calculateColumnSize();
 
             for (Map.Entry<String, LinkedList<IHtmlCheckbox>> entry : boxes.entrySet()) {
-                String key = entry.getKey();
-                LinkedList<IHtmlCheckbox> box = entry.getValue();
+                String id = entry.getKey()
+                        .toLowerCase()
+                        .replace(" ", "_")
+                        .replace("á", "a")
+                        .replace("é", "e")
+                        .replace("í", "i")
+                        .replace("ó", "o")
+                        .replace("ú", "u")
+                        .replace("ñ", "n")
+                        + "_fieldset";
 
-                HtmlFieldset fieldSet = new HtmlFieldset(key);
+                HtmlFieldset fieldSet = new HtmlFieldset(entry.getKey());
                 fieldSet.addClass("col-sm-" + columns);
                 fieldSet.addClass("ocelot-privileges");
-                fieldSet.setId(key);
+                fieldSet.setId(id);
 
-                box.stream().forEach((mercuryCheckBox) -> fieldSet.add(mercuryCheckBox));
+                entry.getValue().stream().forEach((checkbox) -> fieldSet.add(checkbox));
 
                 this.container.add(fieldSet);
             }
