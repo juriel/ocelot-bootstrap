@@ -21,17 +21,17 @@ public class BMultipleCheckBox extends HtmlDiv {
     public static final String STYLE_NORMAL = "checkbox";
 
     private String label;
-    private String style;
+    private int columnSize;
     private String nameAndId;
     private HtmlDiv container;
     private Map<String, LinkedList<IHtmlCheckbox>> boxes;
 
-    public BMultipleCheckBox(String labelText, String nameAndId, String style) {
+    public BMultipleCheckBox(String labelText, String nameAndId, int columnSize) {
         this.label = labelText;
         this.nameAndId = nameAndId;
-        this.style = style;
+        this.columnSize = columnSize;
 
-        container = new HtmlDiv(nameAndId);
+        container = new HtmlDiv(this.nameAndId);
         container.addClass("-inline");
         container.addClass("row");
         container.setStyle("padding-left: 30px; padding-right: 30px;");
@@ -44,19 +44,7 @@ public class BMultipleCheckBox extends HtmlDiv {
     }
 
     public BMultipleCheckBox(String labelText, String nameAndId) {
-        this.label = labelText;
-        this.nameAndId = nameAndId;
-
-        container = new HtmlDiv(nameAndId);
-        container.addClass("-inline");
-        container.addClass("row");
-        container.setStyle("padding-left: 30px; padding-right: 30px;");
-
-        boxes = new LinkedHashMap<>();
-
-        addClass("form-group");
-
-        init();
+        this(labelText, nameAndId, 0);
     }
 
     private void init() {
@@ -88,13 +76,37 @@ public class BMultipleCheckBox extends HtmlDiv {
         fillBoxesInFiledSet();
     }
 
+    public void setColumnSize(int columnSize) {
+        this.columnSize = columnSize;
+    }
+
+    private int calculateColumnSize() {
+        if (columnSize > 12) {
+            return 12;
+        }
+
+        if (columnSize < 0) {
+            return 1;
+        }
+
+        if (boxes.isEmpty()) {
+            return 12;
+        }
+
+        if (columnSize == 0) {
+            columnSize = Math.floorDiv(columnSize, boxes.size());
+
+            if (columnSize < 1) {
+                columnSize = 1;
+            }
+        }
+
+        return columnSize;
+    }
+
     private void fillBoxesInFiledSet() {
         if (!boxes.isEmpty()) {
-            int columns = Math.floorDiv(12, boxes.size());
-
-            if (columns < 1) {
-                columns = 1;
-            }
+            int columns = calculateColumnSize();
 
             for (Map.Entry<String, LinkedList<IHtmlCheckbox>> entry : boxes.entrySet()) {
                 String key = entry.getKey();
